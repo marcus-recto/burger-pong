@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://grl47t7ln01d"]
 
+[ext_resource type="Script" uid="uid://jk2r44rtpbu" path="res://paddle.gd" id="1_ig7tw"]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2apqw"]
 size = Vector2(8, 48)
 
@@ -18,6 +20,7 @@ color = Color(0.12, 0.07785999, 0.061199997, 1)
 
 [node name="LeftPaddle" type="Area2D" parent="." unique_id=2065065392]
 position = Vector2(64, 180)
+script = ExtResource("1_ig7tw")
 metadata/_edit_group_ = true
 
 [node name="ColorRect" type="ColorRect" parent="LeftPaddle" unique_id=1098054330]
@@ -38,6 +41,7 @@ shape = SubResource("RectangleShape2D_2apqw")
 
 [node name="RightPaddle" type="Area2D" parent="." unique_id=60260385]
 position = Vector2(576, 180)
+script = ExtResource("1_ig7tw")
 metadata/_edit_group_ = true
 
 [node name="ColorRect" type="ColorRect" parent="RightPaddle" unique_id=1283584371]
@@ -68,6 +72,7 @@ shape = SubResource("RectangleShape2D_6ckcd")
 [node name="ColorRect" type="ColorRect" parent="Ceiling" unique_id=1103412825]
 offset_right = 640.0
 offset_bottom = 40.0
+color = Color(0, 0, 0, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ceiling" unique_id=519807780]
 position = Vector2(320, 20)
