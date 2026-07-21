@@ -1,0 +1,87 @@
+[gd_scene format=3 uid="uid://grl47t7ln01d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2apqw"]
+size = Vector2(8, 48)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6ckcd"]
+size = Vector2(640, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yyap0"]
+size = Vector2(20, 400)
+
+[node name="Main" type="Node" unique_id=1152847409]
+
+[node name="Background" type="ColorRect" parent="." unique_id=1298852715]
+offset_right = 640.0
+offset_bottom = 360.0
+color = Color(0.12, 0.07785999, 0.061199997, 1)
+
+[node name="LeftPaddle" type="Area2D" parent="." unique_id=2065065392]
+position = Vector2(64, 180)
+metadata/_edit_group_ = true
+
+[node name="ColorRect" type="ColorRect" parent="LeftPaddle" unique_id=1098054330]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -24.0
+offset_right = 4.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftPaddle" unique_id=914581874]
+shape = SubResource("RectangleShape2D_2apqw")
+
+[node name="RightPaddle" type="Area2D" parent="." unique_id=60260385]
+position = Vector2(576, 180)
+metadata/_edit_group_ = true
+
+[node name="ColorRect" type="ColorRect" parent="RightPaddle" unique_id=1283584371]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -24.0
+offset_right = 4.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightPaddle" unique_id=1789851669]
+shape = SubResource("RectangleShape2D_2apqw")
+
+[node name="Floor" type="Area2D" parent="." unique_id=399657289]
+position = Vector2(0, 360)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=1401320917]
+position = Vector2(320, 20)
+shape = SubResource("RectangleShape2D_6ckcd")
+
+[node name="Ceiling" type="Area2D" parent="." unique_id=1192612814]
+
+[node name="ColorRect" type="ColorRect" parent="Ceiling" unique_id=1103412825]
+offset_right = 640.0
+offset_bottom = 40.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ceiling" unique_id=519807780]
+position = Vector2(320, 20)
+shape = SubResource("RectangleShape2D_6ckcd")
+
+[node name="LeftWall" type="Area2D" parent="." unique_id=1828471749]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall" unique_id=1632598041]
+position = Vector2(-10, 200)
+shape = SubResource("RectangleShape2D_yyap0")
+
+[node name="RightWall" type="Area2D" parent="." unique_id=341906890]
+position = Vector2(640, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall" unique_id=1837468661]
+position = Vector2(10, 200)
+shape = SubResource("RectangleShape2D_yyap0")
