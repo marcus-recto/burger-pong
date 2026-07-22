@@ -1,6 +1,9 @@
 [gd_scene format=3 uid="uid://grl47t7ln01d"]
 
-[ext_resource type="Script" uid="uid://jk2r44rtpbu" path="res://paddle.gd" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://jk2r44rtpbu" path="res://src/paddle.gd" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://cw4jepaon6w7r" path="res://src/ball.gd" id="2_0xm2m"]
+[ext_resource type="Script" uid="uid://d0y6dwqx6fen2" path="res://src/floor_ceiling.gd" id="2_h2yge"]
+[ext_resource type="Script" uid="uid://haiw0qud5nql" path="res://src/reset.gd" id="3_1bvp3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2apqw"]
 size = Vector2(8, 48)
@@ -10,6 +13,9 @@ size = Vector2(640, 40)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yyap0"]
 size = Vector2(20, 400)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vxkdg"]
+size = Vector2(8, 8)
 
 [node name="Main" type="Node" unique_id=1152847409]
 
@@ -62,12 +68,14 @@ shape = SubResource("RectangleShape2D_2apqw")
 
 [node name="Floor" type="Area2D" parent="." unique_id=399657289]
 position = Vector2(0, 360)
+script = ExtResource("2_h2yge")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=1401320917]
 position = Vector2(320, 20)
 shape = SubResource("RectangleShape2D_6ckcd")
 
 [node name="Ceiling" type="Area2D" parent="." unique_id=1192612814]
+script = ExtResource("2_h2yge")
 
 [node name="ColorRect" type="ColorRect" parent="Ceiling" unique_id=1103412825]
 offset_right = 640.0
@@ -79,6 +87,7 @@ position = Vector2(320, 20)
 shape = SubResource("RectangleShape2D_6ckcd")
 
 [node name="LeftWall" type="Area2D" parent="." unique_id=1828471749]
+script = ExtResource("3_1bvp3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall" unique_id=1632598041]
 position = Vector2(-10, 200)
@@ -86,7 +95,36 @@ shape = SubResource("RectangleShape2D_yyap0")
 
 [node name="RightWall" type="Area2D" parent="." unique_id=341906890]
 position = Vector2(640, 0)
+script = ExtResource("3_1bvp3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall" unique_id=1837468661]
 position = Vector2(10, 200)
 shape = SubResource("RectangleShape2D_yyap0")
+
+[node name="Ball" type="Area2D" parent="." unique_id=383847154]
+position = Vector2(320, 196)
+script = ExtResource("2_0xm2m")
+
+[node name="ColorRect" type="ColorRect" parent="Ball" unique_id=1577313517]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.95000005, 1, 0, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball" unique_id=1858080237]
+shape = SubResource("RectangleShape2D_vxkdg")
+
+[connection signal="area_entered" from="LeftPaddle" to="LeftPaddle" method="_on_area_entered"]
+[connection signal="area_entered" from="RightPaddle" to="RightPaddle" method="_on_area_entered"]
+[connection signal="area_entered" from="Floor" to="Floor" method="_on_area_entered"]
+[connection signal="area_entered" from="Ceiling" to="Ceiling" method="_on_area_entered"]
+[connection signal="area_entered" from="LeftWall" to="LeftWall" method="_on_area_entered"]
+[connection signal="area_entered" from="RightWall" to="RightWall" method="_on_area_entered"]

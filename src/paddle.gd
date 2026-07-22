@@ -23,3 +23,8 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	direction = Input.get_action_strength(_down) - Input.get_action_strength(_up)
 	position.y = clamp(position.y + direction * speed * delta, 40 + 24, screen_size.y - 24)
+	
+func _on_area_entered(area: Area2D) -> void:
+	print(area)
+	if area.name == "Ball":
+		area.direction = Vector2(ball_x, randf_range(-1, 1))
