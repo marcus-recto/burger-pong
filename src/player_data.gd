@@ -8,9 +8,13 @@ var powerup_position: Vector2
 var max_fry_x: float
 var min_fry_x: float
 var fry_health: int = 10
+var fry_price: float = 5
 
 func get_fry_money() -> float:
 	return fry_money
+
+func get_fry_price() -> float:
+	return fry_price
 
 func add_fry_money(value:float):
 	fry_money += value
