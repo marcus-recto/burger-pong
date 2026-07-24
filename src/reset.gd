@@ -11,7 +11,7 @@ func _ready() -> void:
 	else:
 		add_function = data.add_burger_money
 		
-func _on_area_entered(area: Ball) -> void:
+func _on_area_entered(area: Area2D) -> void:
 	if area.name == "Ball":
 		area.reset()
 		add_function.call(data.money)

@@ -16,10 +16,13 @@ func _ready() -> void:
 		_up = "left_move_up"
 		_down = "left_move_down"
 		ball_x = 1
+		data.min_fry_x = position.x + 8
 	else:
 		_up = "right_move_up"
 		_down = "right_move_down"
 		ball_x = -1
+		data.max_fry_x = position.x - 8
+		
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

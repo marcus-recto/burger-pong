@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://b2cx05w8y5qws" path="res://src/fry_money.gd" id="6_7mycd"]
 [ext_resource type="Script" uid="uid://cs2dlo3akgvfw" path="res://src/burger_money.gd" id="7_272bh"]
 [ext_resource type="Script" uid="uid://df7hvpfra61q8" path="res://src/powerup.gd" id="9_kek77"]
+[ext_resource type="PackedScene" uid="uid://co5cbkgsrsj14" path="res://fry.tscn" id="10_4c57u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2apqw"]
 size = Vector2(8, 48)
@@ -124,9 +125,10 @@ offset_right = 4.0
 offset_bottom = 4.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.95000005, 1, 0, 1)
+color = Color(0.1333332, 1, 0, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ball" unique_id=1858080237]
+visible = false
 shape = SubResource("RectangleShape2D_vxkdg")
 
 [node name="ResetTimer" type="Timer" parent="Ball" unique_id=568098393]
@@ -168,6 +170,7 @@ script = ExtResource("9_kek77")
 [node name="FryTimer" type="Timer" parent="." unique_id=1858709034]
 one_shot = true
 script = ExtResource("9_kek77")
+fry_scene = ExtResource("10_4c57u")
 
 [connection signal="area_entered" from="LeftPaddle" to="LeftPaddle" method="_on_area_entered"]
 [connection signal="area_entered" from="RightPaddle" to="RightPaddle" method="_on_area_entered"]
@@ -177,3 +180,4 @@ script = ExtResource("9_kek77")
 [connection signal="area_entered" from="RightWall" to="RightWall" method="_on_area_entered"]
 [connection signal="area_entered" from="Ball" to="Ball" method="_on_area_entered"]
 [connection signal="timeout" from="Ball/ResetTimer" to="Ball" method="_on_reset_timer_timeout"]
+[connection signal="ball_position_request" from="FryTimer" to="Ball" method="get_ball_pos"]

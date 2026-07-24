@@ -24,3 +24,6 @@ func reset():
 
 func _on_reset_timer_timeout() -> void:
 	reset()
+
+func get_ball_pos():
+	data.set_powerup_position(position)
