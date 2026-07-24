@@ -1,0 +1,6 @@
+[gd_resource type="Resource" format=3 uid="uid://1vnajy25fiwn"]
+
+[ext_resource type="Script" uid="uid://pe2sgetdy4yq" path="res://src/player_data.gd" id="1_ldidj"]
+
+[resource]
+script = ExtResource("1_ldidj")

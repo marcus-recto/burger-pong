@@ -1,14 +1,8 @@
 [gd_scene format=3 uid="uid://grl47t7ln01d"]
 
-[ext_resource type="Script" uid="uid://t44ey434isie" path="res://main.gd" id="1_5vw27"]
-[ext_resource type="Script" uid="uid://jk2r44rtpbu" path="res://src/paddle.gd" id="1_ig7tw"]
-[ext_resource type="Script" uid="uid://cw4jepaon6w7r" path="res://src/ball.gd" id="2_0xm2m"]
-[ext_resource type="Script" uid="uid://d0y6dwqx6fen2" path="res://src/floor_ceiling.gd" id="2_h2yge"]
-[ext_resource type="Script" uid="uid://haiw0qud5nql" path="res://src/reset.gd" id="3_1bvp3"]
-[ext_resource type="Script" uid="uid://d3k5aq5oddw1c" path="res://src/money.gd" id="5_lquwl"]
-[ext_resource type="Script" uid="uid://b2cx05w8y5qws" path="res://src/fry_money.gd" id="6_7mycd"]
-[ext_resource type="Script" uid="uid://cs2dlo3akgvfw" path="res://src/burger_money.gd" id="7_272bh"]
-[ext_resource type="Script" uid="uid://df7hvpfra61q8" path="res://src/powerup.gd" id="9_kek77"]
+[ext_resource type="Script" uid="uid://jk2r44rtpbu" path="res://paddle.gd" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://cw4jepaon6w7r" path="res://ball.gd" id="2_0xm2m"]
+[ext_resource type="Script" uid="uid://d0y6dwqx6fen2" path="res://floor_ceiling.gd" id="2_h2yge"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2apqw"]
 size = Vector2(8, 48)
@@ -23,7 +17,6 @@ size = Vector2(20, 400)
 size = Vector2(8, 8)
 
 [node name="Main" type="Node" unique_id=1152847409]
-script = ExtResource("1_5vw27")
 
 [node name="Background" type="ColorRect" parent="." unique_id=1298852715]
 offset_right = 640.0
@@ -81,7 +74,6 @@ position = Vector2(320, 20)
 shape = SubResource("RectangleShape2D_6ckcd")
 
 [node name="Ceiling" type="Area2D" parent="." unique_id=1192612814]
-script = ExtResource("2_h2yge")
 
 [node name="ColorRect" type="ColorRect" parent="Ceiling" unique_id=1103412825]
 offset_right = 640.0
@@ -89,12 +81,10 @@ offset_bottom = 40.0
 color = Color(0, 0, 0, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ceiling" unique_id=519807780]
-visible = false
 position = Vector2(320, 20)
 shape = SubResource("RectangleShape2D_6ckcd")
 
 [node name="LeftWall" type="Area2D" parent="." unique_id=1828471749]
-script = ExtResource("3_1bvp3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall" unique_id=1632598041]
 position = Vector2(-10, 200)
@@ -102,7 +92,6 @@ shape = SubResource("RectangleShape2D_yyap0")
 
 [node name="RightWall" type="Area2D" parent="." unique_id=341906890]
 position = Vector2(640, 0)
-script = ExtResource("3_1bvp3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall" unique_id=1837468661]
 position = Vector2(10, 200)
@@ -129,51 +118,6 @@ color = Color(0.95000005, 1, 0, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ball" unique_id=1858080237]
 shape = SubResource("RectangleShape2D_vxkdg")
 
-[node name="ResetTimer" type="Timer" parent="Ball" unique_id=568098393]
-wait_time = 5.0
-
-[node name="Money" type="Label" parent="." unique_id=321928873]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -20.0
-offset_right = 20.0
-offset_bottom = 23.0
-grow_horizontal = 2
-text = "100"
-horizontal_alignment = 1
-script = ExtResource("5_lquwl")
-
-[node name="FryMoney" type="Label" parent="." unique_id=2104772288]
-offset_right = 40.0
-offset_bottom = 23.0
-text = "10"
-script = ExtResource("6_7mycd")
-
-[node name="BurgerMoney" type="Label" parent="." unique_id=86780998]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -40.0
-offset_bottom = 23.0
-grow_horizontal = 0
-text = "100"
-horizontal_alignment = 2
-script = ExtResource("7_272bh")
-
-[node name="BurgerTimer" type="Timer" parent="." unique_id=4066532]
-one_shot = true
-script = ExtResource("9_kek77")
-
-[node name="FryTimer" type="Timer" parent="." unique_id=1858709034]
-one_shot = true
-script = ExtResource("9_kek77")
-
 [connection signal="area_entered" from="LeftPaddle" to="LeftPaddle" method="_on_area_entered"]
 [connection signal="area_entered" from="RightPaddle" to="RightPaddle" method="_on_area_entered"]
 [connection signal="area_entered" from="Floor" to="Floor" method="_on_area_entered"]
-[connection signal="area_entered" from="Ceiling" to="Ceiling" method="_on_area_entered"]
-[connection signal="area_entered" from="LeftWall" to="LeftWall" method="_on_area_entered"]
-[connection signal="area_entered" from="RightWall" to="RightWall" method="_on_area_entered"]
-[connection signal="area_entered" from="Ball" to="Ball" method="_on_area_entered"]
-[connection signal="timeout" from="Ball/ResetTimer" to="Ball" method="_on_reset_timer_timeout"]
