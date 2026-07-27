@@ -1,7 +1,7 @@
 class_name PlayerData extends Resource
 
 @export var money: float = 0
-@export var fry_money: float = 0 
+@export var fry_money: float = 5
 @export var burger_money: float = 0 
 var powerup_position: Vector2
 
@@ -9,6 +9,9 @@ var max_fry_x: float
 var min_fry_x: float
 var fry_health: int = 10
 var fry_price: float = 5
+
+var floor_path
+var ceiling_path
 
 func get_fry_money() -> float:
 	return fry_money

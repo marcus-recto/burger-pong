@@ -173,9 +173,15 @@ script = ExtResource("9_kek77")
 fry_scene = ExtResource("10_4c57u")
 
 [connection signal="area_entered" from="LeftPaddle" to="LeftPaddle" method="_on_area_entered"]
+[connection signal="bumped" from="LeftPaddle" to="Floor" method="adjust_ball"]
+[connection signal="bumped" from="LeftPaddle" to="Ceiling" method="adjust_ball"]
 [connection signal="area_entered" from="RightPaddle" to="RightPaddle" method="_on_area_entered"]
+[connection signal="bumped" from="RightPaddle" to="Floor" method="adjust_ball"]
+[connection signal="bumped" from="RightPaddle" to="Ceiling" method="adjust_ball"]
 [connection signal="area_entered" from="Floor" to="Floor" method="_on_area_entered"]
+[connection signal="area_exited" from="Floor" to="Floor" method="_on_area_exited"]
 [connection signal="area_entered" from="Ceiling" to="Ceiling" method="_on_area_entered"]
+[connection signal="area_exited" from="Ceiling" to="Ceiling" method="_on_area_exited"]
 [connection signal="area_entered" from="LeftWall" to="LeftWall" method="_on_area_entered"]
 [connection signal="area_entered" from="RightWall" to="RightWall" method="_on_area_entered"]
 [connection signal="area_entered" from="Ball" to="Ball" method="_on_area_entered"]

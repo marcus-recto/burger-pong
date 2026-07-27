@@ -19,7 +19,7 @@ func _on_area_entered(area: Area2D) -> void:
 	$ResetTimer.start()
 	
 func reset():
-	position = Vector2(320, 180)
+	position = Vector2(320, 196)
 	direction = Vector2(-1,0)
 
 func _on_reset_timer_timeout() -> void:
