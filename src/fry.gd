@@ -2,6 +2,7 @@ extends Area2D
 
 var hits
 signal bumped(ball:Ball)
+var ball_y = 0
 
 var data:PlayerData
 # Called when the node enters the scene tree for the first time.
@@ -15,11 +16,6 @@ func _ready() -> void:
 	bumped.connect(floor_node.adjust_ball)
 	bumped.connect(ceiling_node.adjust_ball)
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
 func _on_timer_timeout():
 	$CollisionShape2D.disabled = false
 	$ColorRect.color = Color("f7c100")
@@ -27,11 +23,11 @@ func _on_timer_timeout():
 	if position.x < data.min_fry_x or position.x > data.max_fry_x:
 		queue_free()
 
-func _on_area_entered(area: Ball) -> void:
+func _on_area_entered(area: Area2D) -> void:
 	if area.name == "Ball":
-		area.direction = Vector2(-area.direction.x, 1)
+		area.direction = Vector2(-area.direction.x, ball_y)
 		hits -= 1
-		data.money += 0.5
+		data.add_ball_score(data.fry_adder)
 		bumped.emit(area)
 		if hits <= 0:
 			queue_free()
