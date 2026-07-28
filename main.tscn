@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://cs2dlo3akgvfw" path="res://src/burger_money.gd" id="7_272bh"]
 [ext_resource type="Script" uid="uid://df7hvpfra61q8" path="res://src/powerup.gd" id="9_kek77"]
 [ext_resource type="PackedScene" uid="uid://co5cbkgsrsj14" path="res://fry.tscn" id="10_4c57u"]
+[ext_resource type="PackedScene" uid="uid://cvasd7fx4r1vx" path="res://burger.tscn" id="11_efxa6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2apqw"]
 size = Vector2(8, 48)
@@ -29,10 +30,10 @@ script = ExtResource("1_5vw27")
 [node name="Background" type="ColorRect" parent="." unique_id=1298852715]
 offset_right = 640.0
 offset_bottom = 360.0
-color = Color(0.12, 0.07785999, 0.061199997, 1)
+color = Color(0.6568553, 0.6568553, 0.6568553, 1)
 
 [node name="LeftPaddle" type="Area2D" parent="." unique_id=2065065392]
-position = Vector2(64, 180)
+position = Vector2(64, 196)
 script = ExtResource("1_ig7tw")
 metadata/_edit_group_ = true
 
@@ -53,7 +54,7 @@ grow_vertical = 2
 shape = SubResource("RectangleShape2D_2apqw")
 
 [node name="RightPaddle" type="Area2D" parent="." unique_id=60260385]
-position = Vector2(576, 180)
+position = Vector2(576, 196)
 script = ExtResource("1_ig7tw")
 metadata/_edit_group_ = true
 
@@ -163,19 +164,29 @@ text = "100"
 horizontal_alignment = 2
 script = ExtResource("7_272bh")
 
+[node name="BurgerTimer2" type="Timer" parent="." unique_id=867822480]
+one_shot = true
+script = ExtResource("9_kek77")
+fry_scene = ExtResource("10_4c57u")
+burger_scene = ExtResource("11_efxa6")
+
 [node name="BurgerTimer" type="Timer" parent="." unique_id=4066532]
 one_shot = true
 script = ExtResource("9_kek77")
+fry_scene = ExtResource("10_4c57u")
+burger_scene = ExtResource("11_efxa6")
 
 [node name="FryTimer2" type="Timer" parent="." unique_id=1931848498]
 one_shot = true
 script = ExtResource("9_kek77")
 fry_scene = ExtResource("10_4c57u")
+burger_scene = ExtResource("11_efxa6")
 
 [node name="FryTimer" type="Timer" parent="." unique_id=1858709034]
 one_shot = true
 script = ExtResource("9_kek77")
 fry_scene = ExtResource("10_4c57u")
+burger_scene = ExtResource("11_efxa6")
 
 [connection signal="area_entered" from="LeftPaddle" to="LeftPaddle" method="_on_area_entered"]
 [connection signal="bumped" from="LeftPaddle" to="Floor" method="adjust_ball"]
@@ -191,5 +202,7 @@ fry_scene = ExtResource("10_4c57u")
 [connection signal="area_entered" from="RightWall" to="RightWall" method="_on_area_entered"]
 [connection signal="area_entered" from="Ball" to="Ball" method="_on_area_entered"]
 [connection signal="timeout" from="Ball/ResetTimer" to="Ball" method="_on_reset_timer_timeout"]
+[connection signal="ball_position_request" from="BurgerTimer2" to="Ball" method="get_ball_pos"]
+[connection signal="ball_position_request" from="BurgerTimer" to="Ball" method="get_ball_pos"]
 [connection signal="ball_position_request" from="FryTimer2" to="Ball" method="get_ball_pos"]
 [connection signal="ball_position_request" from="FryTimer" to="Ball" method="get_ball_pos"]
