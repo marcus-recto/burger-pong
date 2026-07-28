@@ -1,12 +1,16 @@
 [gd_scene format=3 uid="uid://co5cbkgsrsj14"]
 
 [ext_resource type="Script" uid="uid://ojtd10alcyng" path="res://src/fry.gd" id="1_xqyxl"]
+[ext_resource type="Texture2D" uid="uid://c2sruriexbq7x" path="res://assets/fry_down.png" id="2_ih0c2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2apqw"]
 size = Vector2(8, 40)
 
 [node name="Fry" type="Area2D" unique_id=1249415228]
 script = ExtResource("1_xqyxl")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1025945207]
+texture = ExtResource("2_ih0c2")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1582707318]
 anchors_preset = 8

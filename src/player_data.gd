@@ -16,6 +16,8 @@ var burger_interval:float = 0.01
 var floor_path
 var ceiling_path
 
+var player1_color = Color("2176cc")
+var player2_color = Color("ff7d6e")
 func get_left_score() -> int:
 	return left_score
 

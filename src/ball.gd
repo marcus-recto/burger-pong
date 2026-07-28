@@ -26,4 +26,5 @@ func _on_reset_timer_timeout() -> void:
 	reset()
 
 func get_ball_pos():
-	data.set_powerup_position(position)
+	var powerup_pos = Vector2(int(position.x), int(position.y))
+	data.set_powerup_position(powerup_pos)

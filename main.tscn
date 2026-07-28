@@ -5,10 +5,14 @@
 [ext_resource type="Script" uid="uid://cw4jepaon6w7r" path="res://src/ball.gd" id="2_0xm2m"]
 [ext_resource type="Script" uid="uid://d0y6dwqx6fen2" path="res://src/floor_ceiling.gd" id="2_h2yge"]
 [ext_resource type="Script" uid="uid://haiw0qud5nql" path="res://src/reset.gd" id="3_1bvp3"]
+[ext_resource type="Texture2D" uid="uid://byynhqak5w6q2" path="res://assets/blue_paddle.png" id="3_dg77c"]
+[ext_resource type="Texture2D" uid="uid://b5dl630kad8m7" path="res://assets/red_paddle.png" id="4_ycdy4"]
 [ext_resource type="Script" uid="uid://d3k5aq5oddw1c" path="res://src/money.gd" id="5_lquwl"]
 [ext_resource type="Script" uid="uid://b2cx05w8y5qws" path="res://src/fry_money.gd" id="6_7mycd"]
 [ext_resource type="Script" uid="uid://cs2dlo3akgvfw" path="res://src/burger_money.gd" id="7_272bh"]
+[ext_resource type="Texture2D" uid="uid://cgcpam1acxkow" path="res://assets/flea.png" id="8_w48qg"]
 [ext_resource type="Script" uid="uid://df7hvpfra61q8" path="res://src/powerup.gd" id="9_kek77"]
+[ext_resource type="FontFile" uid="uid://dnq1ud78kcujl" path="res://assets/Silver.ttf" id="9_vivmo"]
 [ext_resource type="PackedScene" uid="uid://co5cbkgsrsj14" path="res://fry.tscn" id="10_4c57u"]
 [ext_resource type="PackedScene" uid="uid://cvasd7fx4r1vx" path="res://burger.tscn" id="11_efxa6"]
 
@@ -30,7 +34,7 @@ script = ExtResource("1_5vw27")
 [node name="Background" type="ColorRect" parent="." unique_id=1298852715]
 offset_right = 640.0
 offset_bottom = 360.0
-color = Color(0.6568553, 0.6568553, 0.6568553, 1)
+color = Color(0.9098039, 0.90588236, 0.79607844, 1)
 
 [node name="LeftPaddle" type="Area2D" parent="." unique_id=2065065392]
 position = Vector2(64, 196)
@@ -38,6 +42,7 @@ script = ExtResource("1_ig7tw")
 metadata/_edit_group_ = true
 
 [node name="ColorRect" type="ColorRect" parent="LeftPaddle" unique_id=1098054330]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -53,12 +58,16 @@ grow_vertical = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeftPaddle" unique_id=914581874]
 shape = SubResource("RectangleShape2D_2apqw")
 
+[node name="Sprite2D" type="Sprite2D" parent="LeftPaddle" unique_id=1403628710]
+texture = ExtResource("3_dg77c")
+
 [node name="RightPaddle" type="Area2D" parent="." unique_id=60260385]
 position = Vector2(576, 196)
 script = ExtResource("1_ig7tw")
 metadata/_edit_group_ = true
 
 [node name="ColorRect" type="ColorRect" parent="RightPaddle" unique_id=1283584371]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -74,6 +83,9 @@ grow_vertical = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightPaddle" unique_id=1789851669]
 shape = SubResource("RectangleShape2D_2apqw")
 
+[node name="Sprite2D" type="Sprite2D" parent="RightPaddle" unique_id=1339673518]
+texture = ExtResource("4_ycdy4")
+
 [node name="Floor" type="Area2D" parent="." unique_id=399657289]
 position = Vector2(0, 360)
 script = ExtResource("2_h2yge")
@@ -88,7 +100,6 @@ script = ExtResource("2_h2yge")
 [node name="ColorRect" type="ColorRect" parent="Ceiling" unique_id=1103412825]
 offset_right = 640.0
 offset_bottom = 40.0
-color = Color(0, 0, 0, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ceiling" unique_id=519807780]
 visible = false
@@ -126,7 +137,7 @@ offset_right = 4.0
 offset_bottom = 4.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.1333332, 1, 0, 1)
+color = Color(0, 0, 0, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ball" unique_id=1858080237]
 visible = false
@@ -134,6 +145,10 @@ shape = SubResource("RectangleShape2D_vxkdg")
 
 [node name="ResetTimer" type="Timer" parent="Ball" unique_id=568098393]
 wait_time = 5.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Ball" unique_id=1765431754]
+visible = false
+texture = ExtResource("8_w48qg")
 
 [node name="Money" type="Label" parent="." unique_id=321928873]
 anchors_preset = 5
@@ -143,6 +158,9 @@ offset_left = -20.0
 offset_right = 20.0
 offset_bottom = 23.0
 grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("9_vivmo")
+theme_override_font_sizes/font_size = 50
 text = "100"
 horizontal_alignment = 1
 script = ExtResource("5_lquwl")
@@ -150,6 +168,9 @@ script = ExtResource("5_lquwl")
 [node name="FryMoney" type="Label" parent="." unique_id=2104772288]
 offset_right = 40.0
 offset_bottom = 23.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("9_vivmo")
+theme_override_font_sizes/font_size = 50
 text = "10"
 script = ExtResource("6_7mycd")
 
@@ -160,6 +181,9 @@ anchor_right = 1.0
 offset_left = -40.0
 offset_bottom = 23.0
 grow_horizontal = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("9_vivmo")
+theme_override_font_sizes/font_size = 50
 text = "100"
 horizontal_alignment = 2
 script = ExtResource("7_272bh")
