@@ -7,6 +7,7 @@ var interval: float
 var health: int
 var texture:Texture2D
 var color:Color
+var ball:Area2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -34,7 +35,7 @@ func _process(delta: float) -> void:
 # end of setup cooldown
 func _on_setup_timer_timeout() -> void:
 	$CollisionShape2D.disabled = false
-	
+	$Sprite2D.visible = true
 	$ColorRect.queue_free()
 	
 # adds 1 to ball score and destroys itself if out of health
@@ -42,13 +43,26 @@ func add_to_ball():
 	data.add_ball_score(1)
 	health -= 1
 	if health <= 0:
+		ball.set_ball_speed(data.ball_speed)
 		queue_free()
 	
 func _on_area_entered(area: Area2D) -> void:
 	if area.name == "Ball":
+		ball = area
 		ball_inside = true
+		area.set_ball_speed(data.slow_ball_speed)
+		$Label.visible = true
+		$LabelTimer.stop()
 
 		
 func _on_area_exited(area: Area2D) -> void:
 	if area.name == "Ball":
 		ball_inside = false
+		area.set_ball_speed(data.ball_speed)
+	if not is_queued_for_deletion():
+		$LabelTimer.start()
+
+
+func _on_label_timer_timeout() -> void:
+	if ball_inside == false:
+		$Label.visible = false

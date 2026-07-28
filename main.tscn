@@ -16,14 +16,14 @@
 [ext_resource type="PackedScene" uid="uid://co5cbkgsrsj14" path="res://fry.tscn" id="10_4c57u"]
 [ext_resource type="PackedScene" uid="uid://cvasd7fx4r1vx" path="res://burger.tscn" id="11_efxa6"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2apqw"]
-size = Vector2(8, 48)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6ckcd"]
 size = Vector2(640, 40)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yyap0"]
 size = Vector2(20, 400)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2apqw"]
+size = Vector2(8, 48)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vxkdg"]
 size = Vector2(8, 8)
@@ -35,56 +35,6 @@ script = ExtResource("1_5vw27")
 offset_right = 640.0
 offset_bottom = 360.0
 color = Color(0.9098039, 0.90588236, 0.79607844, 1)
-
-[node name="LeftPaddle" type="Area2D" parent="." unique_id=2065065392]
-position = Vector2(64, 196)
-script = ExtResource("1_ig7tw")
-metadata/_edit_group_ = true
-
-[node name="ColorRect" type="ColorRect" parent="LeftPaddle" unique_id=1098054330]
-visible = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -4.0
-offset_top = -24.0
-offset_right = 4.0
-offset_bottom = 24.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftPaddle" unique_id=914581874]
-shape = SubResource("RectangleShape2D_2apqw")
-
-[node name="Sprite2D" type="Sprite2D" parent="LeftPaddle" unique_id=1403628710]
-texture = ExtResource("3_dg77c")
-
-[node name="RightPaddle" type="Area2D" parent="." unique_id=60260385]
-position = Vector2(576, 196)
-script = ExtResource("1_ig7tw")
-metadata/_edit_group_ = true
-
-[node name="ColorRect" type="ColorRect" parent="RightPaddle" unique_id=1283584371]
-visible = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -4.0
-offset_top = -24.0
-offset_right = 4.0
-offset_bottom = 24.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RightPaddle" unique_id=1789851669]
-shape = SubResource("RectangleShape2D_2apqw")
-
-[node name="Sprite2D" type="Sprite2D" parent="RightPaddle" unique_id=1339673518]
-texture = ExtResource("4_ycdy4")
 
 [node name="Floor" type="Area2D" parent="." unique_id=399657289]
 position = Vector2(0, 360)
@@ -120,35 +70,6 @@ script = ExtResource("3_1bvp3")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall" unique_id=1837468661]
 position = Vector2(10, 200)
 shape = SubResource("RectangleShape2D_yyap0")
-
-[node name="Ball" type="Area2D" parent="." unique_id=383847154]
-position = Vector2(320, 196)
-script = ExtResource("2_0xm2m")
-
-[node name="ColorRect" type="ColorRect" parent="Ball" unique_id=1577313517]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -4.0
-offset_top = -4.0
-offset_right = 4.0
-offset_bottom = 4.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 1)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball" unique_id=1858080237]
-visible = false
-shape = SubResource("RectangleShape2D_vxkdg")
-
-[node name="ResetTimer" type="Timer" parent="Ball" unique_id=568098393]
-wait_time = 5.0
-
-[node name="Sprite2D" type="Sprite2D" parent="Ball" unique_id=1765431754]
-visible = false
-texture = ExtResource("8_w48qg")
 
 [node name="Money" type="Label" parent="." unique_id=321928873]
 anchors_preset = 5
@@ -212,21 +133,102 @@ script = ExtResource("9_kek77")
 fry_scene = ExtResource("10_4c57u")
 burger_scene = ExtResource("11_efxa6")
 
-[connection signal="area_entered" from="LeftPaddle" to="LeftPaddle" method="_on_area_entered"]
-[connection signal="bumped" from="LeftPaddle" to="Floor" method="adjust_ball"]
-[connection signal="bumped" from="LeftPaddle" to="Ceiling" method="adjust_ball"]
-[connection signal="area_entered" from="RightPaddle" to="RightPaddle" method="_on_area_entered"]
-[connection signal="bumped" from="RightPaddle" to="Floor" method="adjust_ball"]
-[connection signal="bumped" from="RightPaddle" to="Ceiling" method="adjust_ball"]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=917096167]
+
+[node name="LeftPaddle" type="Area2D" parent="CanvasLayer" unique_id=2065065392]
+position = Vector2(64, 196)
+script = ExtResource("1_ig7tw")
+metadata/_edit_group_ = true
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/LeftPaddle" unique_id=1098054330]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -24.0
+offset_right = 4.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/LeftPaddle" unique_id=914581874]
+shape = SubResource("RectangleShape2D_2apqw")
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/LeftPaddle" unique_id=1403628710]
+texture = ExtResource("3_dg77c")
+
+[node name="RightPaddle" type="Area2D" parent="CanvasLayer" unique_id=60260385]
+position = Vector2(576, 196)
+script = ExtResource("1_ig7tw")
+metadata/_edit_group_ = true
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/RightPaddle" unique_id=1283584371]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -24.0
+offset_right = 4.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/RightPaddle" unique_id=1789851669]
+shape = SubResource("RectangleShape2D_2apqw")
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/RightPaddle" unique_id=1339673518]
+texture = ExtResource("4_ycdy4")
+
+[node name="Ball" type="Area2D" parent="CanvasLayer" unique_id=383847154]
+position = Vector2(320, 196)
+script = ExtResource("2_0xm2m")
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Ball" unique_id=1577313517]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/Ball" unique_id=1858080237]
+visible = false
+shape = SubResource("RectangleShape2D_vxkdg")
+
+[node name="ResetTimer" type="Timer" parent="CanvasLayer/Ball" unique_id=568098393]
+wait_time = 5.0
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/Ball" unique_id=1765431754]
+texture = ExtResource("8_w48qg")
+
 [connection signal="area_entered" from="Floor" to="Floor" method="_on_area_entered"]
 [connection signal="area_exited" from="Floor" to="Floor" method="_on_area_exited"]
 [connection signal="area_entered" from="Ceiling" to="Ceiling" method="_on_area_entered"]
 [connection signal="area_exited" from="Ceiling" to="Ceiling" method="_on_area_exited"]
 [connection signal="area_entered" from="LeftWall" to="LeftWall" method="_on_area_entered"]
 [connection signal="area_entered" from="RightWall" to="RightWall" method="_on_area_entered"]
-[connection signal="area_entered" from="Ball" to="Ball" method="_on_area_entered"]
-[connection signal="timeout" from="Ball/ResetTimer" to="Ball" method="_on_reset_timer_timeout"]
-[connection signal="ball_position_request" from="BurgerTimer2" to="Ball" method="get_ball_pos"]
-[connection signal="ball_position_request" from="BurgerTimer" to="Ball" method="get_ball_pos"]
-[connection signal="ball_position_request" from="FryTimer2" to="Ball" method="get_ball_pos"]
-[connection signal="ball_position_request" from="FryTimer" to="Ball" method="get_ball_pos"]
+[connection signal="ball_position_request" from="BurgerTimer2" to="CanvasLayer/Ball" method="get_ball_pos"]
+[connection signal="ball_position_request" from="BurgerTimer" to="CanvasLayer/Ball" method="get_ball_pos"]
+[connection signal="ball_position_request" from="FryTimer2" to="CanvasLayer/Ball" method="get_ball_pos"]
+[connection signal="ball_position_request" from="FryTimer" to="CanvasLayer/Ball" method="get_ball_pos"]
+[connection signal="area_entered" from="CanvasLayer/LeftPaddle" to="CanvasLayer/LeftPaddle" method="_on_area_entered"]
+[connection signal="bumped" from="CanvasLayer/LeftPaddle" to="Floor" method="adjust_ball"]
+[connection signal="bumped" from="CanvasLayer/LeftPaddle" to="Ceiling" method="adjust_ball"]
+[connection signal="area_entered" from="CanvasLayer/RightPaddle" to="CanvasLayer/RightPaddle" method="_on_area_entered"]
+[connection signal="bumped" from="CanvasLayer/RightPaddle" to="Floor" method="adjust_ball"]
+[connection signal="bumped" from="CanvasLayer/RightPaddle" to="Ceiling" method="adjust_ball"]
+[connection signal="area_entered" from="CanvasLayer/Ball" to="CanvasLayer/Ball" method="_on_area_entered"]
+[connection signal="timeout" from="CanvasLayer/Ball/ResetTimer" to="CanvasLayer/Ball" method="_on_reset_timer_timeout"]

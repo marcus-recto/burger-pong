@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://cvasd7fx4r1vx"]
 
 [ext_resource type="Script" uid="uid://ckj6wbrg33pq2" path="res://src/burger.gd" id="1_nkn5y"]
+[ext_resource type="FontFile" uid="uid://dnq1ud78kcujl" path="res://assets/Silver.ttf" id="2_5n162"]
+[ext_resource type="Texture2D" uid="uid://d0grrkb2rawxk" path="res://assets/blueburger.png" id="2_eu31t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2apqw"]
 size = Vector2(32, 32)
@@ -9,6 +11,8 @@ size = Vector2(32, 32)
 script = ExtResource("1_nkn5y")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=909783684]
+visible = false
+texture = ExtResource("2_eu31t")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1176463703]
 shape = SubResource("RectangleShape2D_2apqw")
@@ -29,23 +33,26 @@ grow_vertical = 2
 [node name="SetupTimer" type="Timer" parent="." unique_id=776999392]
 one_shot = true
 
+[node name="LabelTimer" type="Timer" parent="." unique_id=246752399]
+one_shot = true
+
 [node name="Label" type="Label" parent="." unique_id=769213533]
-visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
+offset_left = -19.0
+offset_top = -29.0
+offset_right = 21.0
+offset_bottom = -6.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "100"
+theme_override_fonts/font = ExtResource("2_5n162")
 horizontal_alignment = 1
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="area_exited" from="." to="." method="_on_area_exited"]
 [connection signal="timeout" from="SetupTimer" to="." method="_on_setup_timer_timeout"]
+[connection signal="timeout" from="LabelTimer" to="." method="_on_label_timer_timeout"]
