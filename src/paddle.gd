@@ -1,5 +1,6 @@
 extends Area2D
 signal bumped(ball:Ball)
+signal play_noise
 var _up
 var _down
 var ball_x
@@ -35,6 +36,7 @@ func _on_area_entered(area: Area2D) -> void:
 		area.direction = Vector2(ball_x, ball_y)
 		data.add_ball_score(1)
 		bumped.emit(area)
+		play_noise.emit()
 
 func _on_reset_timer_timeout() -> void:
 	pass # Replace with function body.

@@ -1,5 +1,5 @@
 extends Area2D
-
+signal play_audio
 var data: PlayerData
 
 var add_function:Callable
@@ -13,6 +13,7 @@ func _ready() -> void:
 		
 func _on_area_entered(area: Area2D) -> void:
 	if area.name == "Ball":
-		area.reset()
+		area.start_reset()
 		add_function.call()
 		data.ball_held_score = 0
+		play_audio.emit()

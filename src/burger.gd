@@ -1,5 +1,8 @@
 extends Area2D
 
+signal play_noise
+signal stop_noise
+
 var data:PlayerData
 var ball_inside:bool
 var timer:float
@@ -21,7 +24,10 @@ func _ready() -> void:
 	$Label.visible = false
 	$SetupTimer.start()
 	$Sprite2D.texture = texture
-
+	
+	var audio_node = get_node(data.audio_path)
+	play_noise.connect(audio_node.play_burger_crunch)
+	stop_noise.connect(audio_node.stop_burger_crunch)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -30,6 +36,8 @@ func _process(delta: float) -> void:
 		if timer >= interval:
 			timer -= interval
 			add_to_ball()
+			play_noise.emit()
+			
 	$Label.text = str(health)
 			
 # end of setup cooldown
@@ -53,14 +61,18 @@ func _on_area_entered(area: Area2D) -> void:
 		area.set_ball_speed(data.slow_ball_speed)
 		$Label.visible = true
 		$LabelTimer.stop()
+		play_noise.emit()
+		
 
 		
 func _on_area_exited(area: Area2D) -> void:
 	if area.name == "Ball":
 		ball_inside = false
 		area.set_ball_speed(data.ball_speed)
+		timer = 0
 	if not is_queued_for_deletion():
 		$LabelTimer.start()
+
 
 
 func _on_label_timer_timeout() -> void:

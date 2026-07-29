@@ -13,6 +13,8 @@ var fry_texture
 var burger_texture
 var player_color:Color
 
+var fry_audio_func
+
 func _ready() -> void:
 	one_shot = true
 	if name == "FryTimer":
@@ -21,12 +23,14 @@ func _ready() -> void:
 		fry_ball_y = 1
 		fry_texture = load("res://assets/fry_down.png")
 		player_color = player_data.player1_color
+		fry_audio_func = get_node(player_data.audio_path).play_fry_blip_1
 	elif name == "FryTimer2":
 		request_name = "right_fry_request"
 		fry_ball_y = -1
 		make_function = make_fry
 		fry_texture = load("res://assets/fry_up.png")
 		player_color = player_data.player2_color
+		fry_audio_func = get_node(player_data.audio_path).play_fry_blip_2
 	elif name == "BurgerTimer":
 		request_name = "left_burger_request"
 		make_function = make_burger
@@ -52,6 +56,7 @@ func make_fry()->void:
 	fry.ball_y = fry_ball_y
 	fry.texture = fry_texture
 	fry.player_color = player_color
+	fry.connect_audio_signal(fry_audio_func)
 	add_child(fry)
 	
 func make_burger()->void:

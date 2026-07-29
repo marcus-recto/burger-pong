@@ -2,6 +2,7 @@ extends Area2D
 
 var hits
 signal bumped(ball:Ball)
+signal play_noise
 var ball_y = 0
 var texture:Texture2D   # set by powerup request
 var player_color
@@ -18,6 +19,7 @@ func _ready() -> void:
 	bumped.connect(floor_node.adjust_ball)
 	bumped.connect(ceiling_node.adjust_ball)
 	$Sprite2D.texture = texture
+	
 
 func _on_timer_timeout():
 	$CollisionShape2D.disabled = false
@@ -32,7 +34,10 @@ func _on_area_entered(area: Area2D) -> void:
 		hits -= 1
 		data.add_ball_score(data.fry_adder)
 		bumped.emit(area)
+		play_noise.emit()
 		if hits <= 0:
 			queue_free()
 
+func connect_audio_signal(function:Callable):
+	play_noise.connect(function)
 		

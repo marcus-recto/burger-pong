@@ -1,5 +1,7 @@
 class_name FloorCeiling extends Area2D
 
+signal play_noise
+
 var ball_y
 var _inside:bool = false
 var data:PlayerData
@@ -23,6 +25,7 @@ func _on_area_entered(area: Area2D) -> void:
 	if area.name == "Ball":
 		_inside = true
 		area.direction.y = ball_y
+		play_noise.emit()
 		#if data.fry_money >= 5:
 			#fry_timer.ball_position_request.emit()
 			#fry_timer.make_fry()
