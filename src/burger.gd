@@ -59,6 +59,7 @@ func _on_area_entered(area: Area2D) -> void:
 		ball = area
 		ball_inside = true
 		area.set_ball_speed(data.slow_ball_speed)
+		add_to_ball()
 		$Label.visible = true
 		$LabelTimer.stop()
 		play_noise.emit()

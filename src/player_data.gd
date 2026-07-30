@@ -1,5 +1,11 @@
 class_name PlayerData extends Resource
 
+signal animate_ball_score
+signal animate_left_score
+signal animate_right_score
+
+var ball_score_freq = 50
+
 @export var ball_held_score: int = 0
 @export var left_score: int = 0
 @export var right_score: int = 0 
@@ -27,19 +33,21 @@ func get_left_score() -> int:
 
 func add_left_score():
 	left_score += ball_held_score
+	animate_left_score.emit()
 
 func get_right_score() -> int:
 	return right_score
 
 func add_right_score():
 	right_score += ball_held_score
+	animate_right_score.emit()
 	
 func add_ball_score(value:int):
 	ball_held_score += value
+	animate_ball_score.emit()
 
 func get_ball_score() -> int:
 	return ball_held_score
-	
 	
 func get_powerup_position() -> Vector2:
 	return powerup_position

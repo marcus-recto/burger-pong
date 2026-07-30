@@ -1,5 +1,6 @@
 extends Area2D
 signal play_audio
+
 var data: PlayerData
 
 var add_function:Callable
@@ -8,7 +9,7 @@ func _ready() -> void:
 	data = load("res://player_data.tres")
 	if name == "LeftWall":
 		add_function = data.add_right_score
-	else:
+	elif name == "RightWall":
 		add_function = data.add_left_score
 		
 func _on_area_entered(area: Area2D) -> void:

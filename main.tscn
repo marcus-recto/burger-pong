@@ -7,19 +7,17 @@
 [ext_resource type="Script" uid="uid://haiw0qud5nql" path="res://src/reset.gd" id="3_1bvp3"]
 [ext_resource type="Texture2D" uid="uid://byynhqak5w6q2" path="res://assets/blue_paddle.png" id="3_dg77c"]
 [ext_resource type="Texture2D" uid="uid://b5dl630kad8m7" path="res://assets/red_paddle.png" id="4_ycdy4"]
-[ext_resource type="Script" uid="uid://d3k5aq5oddw1c" path="res://src/money.gd" id="5_lquwl"]
-[ext_resource type="Script" uid="uid://b2cx05w8y5qws" path="res://src/fry_money.gd" id="6_7mycd"]
-[ext_resource type="Script" uid="uid://cs2dlo3akgvfw" path="res://src/burger_money.gd" id="7_272bh"]
 [ext_resource type="Texture2D" uid="uid://cgcpam1acxkow" path="res://assets/flea.png" id="8_w48qg"]
 [ext_resource type="Script" uid="uid://df7hvpfra61q8" path="res://src/powerup.gd" id="9_kek77"]
 [ext_resource type="FontFile" uid="uid://dnq1ud78kcujl" path="res://assets/Silver.ttf" id="9_vivmo"]
 [ext_resource type="PackedScene" uid="uid://co5cbkgsrsj14" path="res://fry.tscn" id="10_4c57u"]
 [ext_resource type="AudioStream" uid="uid://tb6ou3dt0by7" path="res://sfx/ScoreIncrease.wav" id="11_cegan"]
 [ext_resource type="PackedScene" uid="uid://cvasd7fx4r1vx" path="res://burger.tscn" id="11_efxa6"]
-[ext_resource type="Script" uid="uid://td2unwe8xm2h" path="res://audio.gd" id="11_yaehf"]
+[ext_resource type="Script" uid="uid://td2unwe8xm2h" path="res://src/audio.gd" id="11_yaehf"]
 [ext_resource type="AudioStream" uid="uid://c8rulcutsk1ep" path="res://sfx/Blip.wav" id="12_074og"]
 [ext_resource type="AudioStream" uid="uid://cilc8ohgg4m2s" path="res://sfx/Hit.wav" id="12_82xsv"]
 [ext_resource type="AudioStream" uid="uid://bmtfij7t2js76" path="res://sfx/Blip2.wav" id="13_cegan"]
+[ext_resource type="Script" uid="uid://cejtu0iiwlmsy" path="res://src/text.gd" id="18_074og"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6ckcd"]
 size = Vector2(640, 40)
@@ -78,44 +76,6 @@ script = ExtResource("3_1bvp3")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall" unique_id=1837468661]
 position = Vector2(10, 200)
 shape = SubResource("RectangleShape2D_yyap0")
-
-[node name="Money" type="Label" parent="." unique_id=321928873]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -20.0
-offset_right = 20.0
-offset_bottom = 23.0
-grow_horizontal = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("9_vivmo")
-theme_override_font_sizes/font_size = 50
-text = "100"
-horizontal_alignment = 1
-script = ExtResource("5_lquwl")
-
-[node name="FryMoney" type="Label" parent="." unique_id=2104772288]
-offset_right = 40.0
-offset_bottom = 23.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("9_vivmo")
-theme_override_font_sizes/font_size = 50
-text = "10"
-script = ExtResource("6_7mycd")
-
-[node name="BurgerMoney" type="Label" parent="." unique_id=86780998]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -40.0
-offset_bottom = 23.0
-grow_horizontal = 0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("9_vivmo")
-theme_override_font_sizes/font_size = 50
-text = "100"
-horizontal_alignment = 2
-script = ExtResource("7_272bh")
 
 [node name="Audio" type="Node" parent="." unique_id=1734653620]
 script = ExtResource("11_yaehf")
@@ -241,6 +201,58 @@ wait_time = 5.0
 texture = ExtResource("8_w48qg")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1697142987]
+
+[node name="BallScore" type="RichTextLabel" parent="CanvasLayer" unique_id=1831545875]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -37.0
+offset_right = 37.0
+offset_bottom = 56.0
+grow_horizontal = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("9_vivmo")
+theme_override_font_sizes/normal_font_size = 50
+bbcode_enabled = true
+text = "10000"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+script = ExtResource("18_074og")
+
+[node name="LeftScore" type="RichTextLabel" parent="CanvasLayer" unique_id=776108155]
+offset_left = 5.0
+offset_right = 60.0
+offset_bottom = 56.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("9_vivmo")
+theme_override_font_sizes/normal_font_size = 50
+bbcode_enabled = true
+text = "10"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+script = ExtResource("18_074og")
+
+[node name="RightScore" type="RichTextLabel" parent="CanvasLayer" unique_id=2073094031]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -250.0
+offset_bottom = 56.0
+grow_horizontal = 0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("9_vivmo")
+theme_override_font_sizes/normal_font_size = 50
+bbcode_enabled = true
+text = "10"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 2
+script = ExtResource("18_074og")
 
 [connection signal="area_entered" from="Floor" to="Floor" method="_on_area_entered"]
 [connection signal="area_exited" from="Floor" to="Floor" method="_on_area_exited"]
