@@ -15,9 +15,11 @@ var max_fry_x: float
 var min_fry_x: float
 var fry_health: int = 10
 var fry_adder: int = 1
+var fry_timer: float = 3.0
 
 var burger_health: int = 20
 var burger_interval:float = 0.5
+var burger_timer: float = 10.0
 
 var ball_speed = 300
 var slow_ball_speed = 45

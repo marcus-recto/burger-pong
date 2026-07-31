@@ -1,5 +1,7 @@
 extends Timer
 signal ball_position_request
+signal play_animation(length)
+signal has_paused
 
 var request_name
 var player_data:PlayerData = load("res://player_data.tres")
@@ -15,12 +17,15 @@ var player_color:Color
 
 var fry_audio_func
 
+var time
+
 func _ready() -> void:
 	one_shot = true
 	if name == "FryTimer":
 		request_name = "left_fry_request"
 		make_function = make_fry
 		fry_ball_y = 1
+		time = player_data.fry_timer
 		fry_texture = load("res://assets/fry_down.png")
 		player_color = player_data.player1_color
 		fry_audio_func = get_node(player_data.audio_path).play_fry_blip_1
@@ -28,27 +33,32 @@ func _ready() -> void:
 		request_name = "right_fry_request"
 		fry_ball_y = -1
 		make_function = make_fry
+		time = player_data.fry_timer
 		fry_texture = load("res://assets/fry_up.png")
 		player_color = player_data.player2_color
 		fry_audio_func = get_node(player_data.audio_path).play_fry_blip_2
 	elif name == "BurgerTimer":
 		request_name = "left_burger_request"
 		make_function = make_burger
+		time = player_data.burger_timer
 		burger_texture = load("res://assets/blueburger.png")
 		player_color = player_data.player1_color
 	else:
 		request_name = "right_burger_request"
 		make_function = make_burger
+		time = player_data.burger_timer
 		burger_texture = load("res://assets/redburger.png")
 		player_color = player_data.player2_color
+	start_timer()
 		
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed(request_name):
-		if time_left == 0:
-			start()
+		if time_left == 0 and not paused:
+			start_timer()
 			ball_position_request.emit()
 			make_function.call()
+			
 			
 func make_fry()->void:
 	var fry: Area2D = fry_scene.instantiate()
@@ -65,6 +75,13 @@ func make_burger()->void:
 	burger.texture = burger_texture
 	burger.color = player_color
 	add_child(burger)
+
+func pause():
+	paused = true
+	has_paused.emit()
 	
-	
+func start_timer():
+	if paused: paused = false
+	start(time)
+	play_animation.emit(time)
 	

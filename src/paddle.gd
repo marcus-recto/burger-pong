@@ -34,7 +34,7 @@ func _on_area_entered(area: Area2D) -> void:
 	if area.name == "Ball":
 		var ball_y = (area.position.y - position.y) / (24 + area.get_radius())
 		area.direction = Vector2(ball_x, ball_y)
-		data.add_ball_score(1)
+		#data.add_ball_score(1)
 		bumped.emit(area)
 		play_noise.emit()
 

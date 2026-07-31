@@ -1,13 +1,18 @@
 class_name Ball extends Area2D
 
+signal pause
+signal resume
+
 var data:PlayerData = load("res://player_data.tres")
 var direction: Vector2
 var speed
+var starting_x_dir
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	speed = data.ball_speed
-	direction = Vector2(-1,0)
+	starting_x_dir = -1
+	direction = Vector2(starting_x_dir,0)
 	#start_reset()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -19,16 +24,18 @@ func get_radius():
 
 # safety function
 func _on_area_entered(area: Area2D) -> void:
-	$ResetTimer.start()
+	#$ResetTimer.start()
+	pass
 	
 func reset():
 	$CollisionShape2D.disabled = false
 	visible = true
 	position = Vector2(320, 196)
-	direction = Vector2(-1,0)
-
+	direction = Vector2(starting_x_dir,0)
+	
 func _on_reset_timer_timeout() -> void:
 	reset()
+	resume.emit()
 
 func get_ball_pos():
 	var powerup_pos = Vector2(int(position.x), int(position.y))
@@ -39,6 +46,8 @@ func set_ball_speed(value:int):
 
 func start_reset():
 	direction = Vector2(0,0)
+	starting_x_dir *= -1
 	visible = false
 	position = Vector2(-16,-16)
 	$ResetTimer.start()
+	pause.emit()

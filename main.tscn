@@ -18,6 +18,11 @@
 [ext_resource type="AudioStream" uid="uid://cilc8ohgg4m2s" path="res://sfx/Hit.wav" id="12_82xsv"]
 [ext_resource type="AudioStream" uid="uid://bmtfij7t2js76" path="res://sfx/Blip2.wav" id="13_cegan"]
 [ext_resource type="Script" uid="uid://cejtu0iiwlmsy" path="res://src/text.gd" id="18_074og"]
+[ext_resource type="Script" uid="uid://bl7gtbj53i7u4" path="res://src/cooldown.gd" id="19_cegan"]
+[ext_resource type="Texture2D" uid="uid://c2sruriexbq7x" path="res://assets/fry_down.png" id="20_d13ii"]
+[ext_resource type="Texture2D" uid="uid://cowb6tw48to26" path="res://assets/fry_up.png" id="21_1u8w0"]
+[ext_resource type="Texture2D" uid="uid://d0grrkb2rawxk" path="res://assets/blueburger.png" id="22_0odxb"]
+[ext_resource type="Texture2D" uid="uid://b7an4brurwar0" path="res://assets/redburger.png" id="23_lswn8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6ckcd"]
 size = Vector2(640, 40)
@@ -95,13 +100,7 @@ stream = ExtResource("11_cegan")
 [node name="RegularHit" type="AudioStreamPlayer" parent="Audio" unique_id=1824790941]
 stream = ExtResource("12_82xsv")
 
-[node name="BurgerTimer2" type="Timer" parent="." unique_id=867822480]
-one_shot = true
-script = ExtResource("9_kek77")
-fry_scene = ExtResource("10_4c57u")
-burger_scene = ExtResource("11_efxa6")
-
-[node name="BurgerTimer" type="Timer" parent="." unique_id=4066532]
+[node name="FryTimer" type="Timer" parent="." unique_id=1858709034]
 one_shot = true
 script = ExtResource("9_kek77")
 fry_scene = ExtResource("10_4c57u")
@@ -113,7 +112,13 @@ script = ExtResource("9_kek77")
 fry_scene = ExtResource("10_4c57u")
 burger_scene = ExtResource("11_efxa6")
 
-[node name="FryTimer" type="Timer" parent="." unique_id=1858709034]
+[node name="BurgerTimer" type="Timer" parent="." unique_id=4066532]
+one_shot = true
+script = ExtResource("9_kek77")
+fry_scene = ExtResource("10_4c57u")
+burger_scene = ExtResource("11_efxa6")
+
+[node name="BurgerTimer2" type="Timer" parent="." unique_id=867822480]
 one_shot = true
 script = ExtResource("9_kek77")
 fry_scene = ExtResource("10_4c57u")
@@ -195,14 +200,15 @@ visible = false
 shape = SubResource("RectangleShape2D_vxkdg")
 
 [node name="ResetTimer" type="Timer" parent="TopGameElements/Ball" unique_id=568098393]
-wait_time = 5.0
+wait_time = 3.0
+one_shot = true
 
 [node name="Sprite2D" type="Sprite2D" parent="TopGameElements/Ball" unique_id=1765431754]
 texture = ExtResource("8_w48qg")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1697142987]
+[node name="UI" type="CanvasLayer" parent="." unique_id=1697142987]
 
-[node name="BallScore" type="RichTextLabel" parent="CanvasLayer" unique_id=1831545875]
+[node name="BallScore" type="RichTextLabel" parent="UI" unique_id=1831545875]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -221,7 +227,7 @@ autowrap_mode = 0
 horizontal_alignment = 1
 script = ExtResource("18_074og")
 
-[node name="LeftScore" type="RichTextLabel" parent="CanvasLayer" unique_id=776108155]
+[node name="LeftScore" type="RichTextLabel" parent="UI" unique_id=776108155]
 offset_left = 5.0
 offset_right = 60.0
 offset_bottom = 56.0
@@ -236,7 +242,7 @@ autowrap_mode = 0
 vertical_alignment = 1
 script = ExtResource("18_074og")
 
-[node name="RightScore" type="RichTextLabel" parent="CanvasLayer" unique_id=2073094031]
+[node name="RightScore" type="RichTextLabel" parent="UI" unique_id=2073094031]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -254,6 +260,87 @@ autowrap_mode = 0
 horizontal_alignment = 2
 script = ExtResource("18_074og")
 
+[node name="BlueFryIcon" type="Control" parent="UI" unique_id=1676329627]
+visible = false
+layout_mode = 3
+anchor_left = 0.015000001
+anchor_right = 0.016
+offset_right = 19.519999
+offset_bottom = 40.0
+script = ExtResource("19_cegan")
+
+[node name="Sprite2D" type="Sprite2D" parent="UI/BlueFryIcon" unique_id=428353766]
+position = Vector2(20, 20)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("20_d13ii")
+
+[node name="ColorRect" type="ColorRect" parent="UI/BlueFryIcon" unique_id=1433680645]
+layout_mode = 0
+offset_top = 5.0
+offset_right = 40.0
+offset_bottom = 37.0
+color = Color(1, 1, 1, 0.84313726)
+
+[node name="RedFryIcon" type="Control" parent="UI" unique_id=201913409]
+visible = false
+layout_mode = 3
+anchor_left = 0.015000001
+anchor_right = 0.016
+offset_right = 19.519999
+offset_bottom = 40.0
+script = ExtResource("19_cegan")
+
+[node name="Sprite2D" type="Sprite2D" parent="UI/RedFryIcon" unique_id=1336725378]
+position = Vector2(20, 20)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("21_1u8w0")
+
+[node name="ColorRect" type="ColorRect" parent="UI/RedFryIcon" unique_id=1655799474]
+layout_mode = 0
+offset_top = 5.0
+offset_right = 40.0
+offset_bottom = 37.0
+color = Color(1, 1, 1, 0.84313726)
+
+[node name="BlueBurgerIcon" type="Control" parent="UI" unique_id=592663796]
+visible = false
+layout_mode = 3
+anchor_left = 0.015000001
+anchor_right = 0.016
+offset_right = 19.519999
+offset_bottom = 40.0
+script = ExtResource("19_cegan")
+
+[node name="Sprite2D" type="Sprite2D" parent="UI/BlueBurgerIcon" unique_id=967018653]
+position = Vector2(20, 20)
+texture = ExtResource("22_0odxb")
+
+[node name="ColorRect" type="ColorRect" parent="UI/BlueBurgerIcon" unique_id=1814427382]
+layout_mode = 0
+offset_top = 5.0
+offset_right = 40.0
+offset_bottom = 37.0
+color = Color(1, 1, 1, 0.84313726)
+
+[node name="RedBurgerIcon" type="Control" parent="UI" unique_id=326332474]
+layout_mode = 3
+anchor_left = 0.015000001
+anchor_right = 0.016
+offset_right = 19.519999
+offset_bottom = 40.0
+script = ExtResource("19_cegan")
+
+[node name="Sprite2D" type="Sprite2D" parent="UI/RedBurgerIcon" unique_id=881991189]
+position = Vector2(20, 20)
+texture = ExtResource("23_lswn8")
+
+[node name="ColorRect" type="ColorRect" parent="UI/RedBurgerIcon" unique_id=908695727]
+layout_mode = 0
+offset_top = 5.0
+offset_right = 40.0
+offset_bottom = 37.0
+color = Color(1, 1, 1, 0.84313726)
+
 [connection signal="area_entered" from="Floor" to="Floor" method="_on_area_entered"]
 [connection signal="area_exited" from="Floor" to="Floor" method="_on_area_exited"]
 [connection signal="play_noise" from="Floor" to="Audio" method="play_regular_hit"]
@@ -264,10 +351,18 @@ script = ExtResource("18_074og")
 [connection signal="play_audio" from="LeftWall" to="Audio" method="_play_score_increase"]
 [connection signal="area_entered" from="RightWall" to="RightWall" method="_on_area_entered"]
 [connection signal="play_audio" from="RightWall" to="Audio" method="_play_score_increase"]
-[connection signal="ball_position_request" from="BurgerTimer2" to="TopGameElements/Ball" method="get_ball_pos"]
-[connection signal="ball_position_request" from="BurgerTimer" to="TopGameElements/Ball" method="get_ball_pos"]
-[connection signal="ball_position_request" from="FryTimer2" to="TopGameElements/Ball" method="get_ball_pos"]
 [connection signal="ball_position_request" from="FryTimer" to="TopGameElements/Ball" method="get_ball_pos"]
+[connection signal="has_paused" from="FryTimer" to="UI/BlueFryIcon" method="pause_animation"]
+[connection signal="play_animation" from="FryTimer" to="UI/BlueFryIcon" method="animate"]
+[connection signal="ball_position_request" from="FryTimer2" to="TopGameElements/Ball" method="get_ball_pos"]
+[connection signal="has_paused" from="FryTimer2" to="UI/RedFryIcon" method="pause_animation"]
+[connection signal="play_animation" from="FryTimer2" to="UI/RedFryIcon" method="animate"]
+[connection signal="ball_position_request" from="BurgerTimer" to="TopGameElements/Ball" method="get_ball_pos"]
+[connection signal="has_paused" from="BurgerTimer" to="UI/BlueBurgerIcon" method="pause_animation"]
+[connection signal="play_animation" from="BurgerTimer" to="UI/BlueBurgerIcon" method="animate"]
+[connection signal="ball_position_request" from="BurgerTimer2" to="TopGameElements/Ball" method="get_ball_pos"]
+[connection signal="has_paused" from="BurgerTimer2" to="UI/RedBurgerIcon" method="pause_animation"]
+[connection signal="play_animation" from="BurgerTimer2" to="UI/RedBurgerIcon" method="animate"]
 [connection signal="area_entered" from="TopGameElements/LeftPaddle" to="TopGameElements/LeftPaddle" method="_on_area_entered"]
 [connection signal="bumped" from="TopGameElements/LeftPaddle" to="Floor" method="adjust_ball"]
 [connection signal="bumped" from="TopGameElements/LeftPaddle" to="Ceiling" method="adjust_ball"]
@@ -277,4 +372,12 @@ script = ExtResource("18_074og")
 [connection signal="bumped" from="TopGameElements/RightPaddle" to="Ceiling" method="adjust_ball"]
 [connection signal="play_noise" from="TopGameElements/RightPaddle" to="Audio" method="play_regular_hit"]
 [connection signal="area_entered" from="TopGameElements/Ball" to="TopGameElements/Ball" method="_on_area_entered"]
+[connection signal="pause" from="TopGameElements/Ball" to="BurgerTimer2" method="pause"]
+[connection signal="pause" from="TopGameElements/Ball" to="BurgerTimer" method="pause"]
+[connection signal="pause" from="TopGameElements/Ball" to="FryTimer2" method="pause"]
+[connection signal="pause" from="TopGameElements/Ball" to="FryTimer" method="pause"]
+[connection signal="resume" from="TopGameElements/Ball" to="BurgerTimer2" method="start_timer"]
+[connection signal="resume" from="TopGameElements/Ball" to="BurgerTimer" method="start_timer"]
+[connection signal="resume" from="TopGameElements/Ball" to="FryTimer2" method="start_timer"]
+[connection signal="resume" from="TopGameElements/Ball" to="FryTimer" method="start_timer"]
 [connection signal="timeout" from="TopGameElements/Ball/ResetTimer" to="TopGameElements/Ball" method="_on_reset_timer_timeout"]
